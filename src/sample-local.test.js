@@ -1,13 +1,22 @@
-const { Builder } = require('selenium-webdriver');
+const { Builder, By, Capabilities } = require("selenium-webdriver");
 
-describe('BStack demo test', () => {
-  jest.setTimeout(100000);
+describe("BStack demo test", () => {
+  let driver;
 
-  test('local test', async () => {
-    const driver = await new Builder().usingServer('http://hub-cloud.browserstack.com/wd/hub').build();
-    await driver.get("http://bs-local.com:45454/");
-    const title = await driver.getTitle();
-    expect(title).toContain('BrowserStack Local');
-    await driver.quit();
+  beforeAll(() => {
+    driver = new Builder()
+      .usingServer(`http://localhost:4444/wd/hub`)
+      .withCapabilities(Capabilities.chrome())
+      .build();
   });
+  
+  afterAll(async () => {
+    await driver.quit();
+  })
+
+  test("local test", async () => {
+    await driver.get("http://bs-local.com:45454/");
+
+    expect(await driver.getTitle()).toContain('BrowserStack Local');
+  }, 10000000);
 });
