@@ -1,5 +1,4 @@
 const { Builder, By, Key, until, Capabilities } = require("selenium-webdriver");
-const fs = require("fs");
 
 describe("BStack demo test", () => {
   let driver;
@@ -13,14 +12,11 @@ describe("BStack demo test", () => {
   
   afterAll(async () => {
     await driver.quit();
-  });
+  })
   
   test("login test", async () => {
     await driver.get("https://bstackdemo.com");
     await driver.wait(until.titleMatches(/StackDemo/i), 10000);
-
-    // Screenshot after page load
-    await takeScreenshot("login-test-1");
 
     await driver.wait(until.elementLocated(By.css("#signin")));
     await driver.findElement(By.css("#signin")).click();
@@ -39,9 +35,6 @@ describe("BStack demo test", () => {
 
     await driver.wait(until.elementLocated(By.css(".api-error")));
 
-    // Screenshot after error appears
-    await takeScreenshot("login-test-2");
-
     expect(await driver.findElement(By.css(".api-error")).getText()).toBe(
       "Your account has been locked."
     );
@@ -53,25 +46,16 @@ describe("BStack demo test", () => {
         await driver.get("https://bstackdemo.com/");
         await driver.wait(until.titleMatches(/StackDemo/i), 10000);
 
-        // Screenshot after page load
-        await takeScreenshot("add-to-cart-1");
-
         // locating product on webpage and getting name of the product
         await driver.wait(until.elementLocated(By.xpath('//*[@id="1"]/p')));
         let productText = await driver
           .findElement(By.xpath('//*[@id="1"]/p'))
           .getText();
-
         // clicking the 'Add to cart' button
         await driver.findElement(By.xpath('//*[@id="1"]/div[4]')).click();
-
         // waiting until the Cart pane has been displayed on the webpage
         await driver.wait(until.elementLocated(By.className("float-cart__content")));
         await driver.findElement(By.className("float-cart__content"));
-
-        // Screenshot after cart opens
-        await takeScreenshot("add-to-cart-2");
-
         // locating product in cart and getting name of the product in cart
         let productCartText = await driver
           .findElement(
@@ -80,18 +64,9 @@ describe("BStack demo test", () => {
             )
           )
           .getText();
-
         // checking whether product has been added to cart by comparing product name
         expect(productText).toBe(productCartText);
     },
     10000000
   );
-
-  // Helper function to take timestamped screenshots
-  async function takeScreenshot(filenamePrefix) {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const screenshot = await driver.takeScreenshot();
-    fs.writeFileSync(`${filenamePrefix}-${timestamp}.png`, screenshot, 'base64');
-    console.log(`✅ Screenshot saved as ${filenamePrefix}-${timestamp}.png`);
-  }
 });
