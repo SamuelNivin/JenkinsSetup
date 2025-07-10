@@ -1,0 +1,9 @@
+# Ignore node_modules and system files
+node_modules/
+.env
+log/
+*.log
+*.json
+coverage/
+.DS_Store
+browserstack*.png
