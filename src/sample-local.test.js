@@ -1,4 +1,4 @@
-const { Builder, By, Capabilities } = require("selenium-webdriver");
+const { Builder, By, until, Capabilities } = require("selenium-webdriver");
 
 describe("BStack demo test", () => {
   let driver;
@@ -9,18 +9,17 @@ describe("BStack demo test", () => {
       .withCapabilities(Capabilities.chrome())
       .build();
   });
-  
+
   afterAll(async () => {
     await driver.quit();
   });
 
   test("local test", async () => {
     await driver.get("http://bs-local.com:45454/");
-    
-    const title = await driver.getTitle();
-    console.log("🪪 Page title:", title);
+    await driver.wait(until.elementLocated(By.tagName("h1")), 10000);
+    const heading = await driver.findElement(By.tagName("h1")).getText();
 
-    // Use a leniency check in case the title is blank on mobile browsers
-    expect(title.length).toBeGreaterThan(0);
-  }, 30000); // Reasonable timeout
+    console.log("💬 Heading text:", heading);
+    expect(heading).toContain("BrowserStack Local");
+  }, 30000);
 });
