@@ -1,15 +1,15 @@
 {
   "name": "jenkinssetup",
   "version": "1.0.0",
+  "description": "Sample setup for running tests via Jenkins on BrowserStack",
   "main": "index.js",
   "scripts": {
-    "sample-test": "browserstack-node-sdk jest src/sample.test.js",
+    "sample-test": "browserstack-node-sdk --config browserstack.yml jest src/sample.test.js",
     "sample-local-test": "browserstack-node-sdk --config browserstack-local.yml jest src/sample-local.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "browserstack-local": "^1.5.8",
     "dotenv": "^17.2.0",
