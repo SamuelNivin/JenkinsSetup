@@ -7,11 +7,17 @@
       "osVersion": "Monterey",
       "browserName": "Safari",
       "browserVersion": "15.6"
+    },
+    {
+      "deviceName": "iPhone 13",
+      "osVersion": "15",
+      "browserName": "Chromium",
+      "deviceOrientation": "portrait"
     }
   ],
   "browserstackLocal": true,
-  "buildName": "bstack-demo",
-  "projectName": "BrowserStack Sample",
+  "buildName": "bstack-local-demo",
+  "projectName": "BrowserStack Local Sample",
   "debug": true,
   "networkLogs": true,
   "consoleLogs": "info"
