@@ -1,5 +1,5 @@
-userName: "${BROWSERSTACK_USERNAME}",
-accessKey: "${BROWSERSTACK_ACCESS_KEY}",
+userName: ${BROWSERSTACK_USERNAME}
+accessKey: ${BROWSERSTACK_ACCESS_KEY}
 platforms:
   - os: Windows
     osVersion: 10
@@ -17,6 +17,7 @@ browserstackLocal: true
 buildName: bstack-demo
 projectName: BrowserStack Sample
 CUSTOM_TAG_1: "You can set a custom Build Tag here"
+# Use CUSTOM_TAG_<N> and set more build tags as you need.
 debug: true
 networkLogs: true
 consoleLogs: info
