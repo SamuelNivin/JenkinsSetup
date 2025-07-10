@@ -10,9 +10,10 @@ platforms:
     browserName: Chromium
     deviceOrientation: portrait
 browserstackLocal: true
-buildName: bstack-demo
-projectName: BrowserStack Sample
-CUSTOM_TAG_1: "You can set a custom Build Tag here"
+buildName: Jenkins CI - bstack-demo
+projectName: BrowserStack Jenkins Setup
+CUSTOM_TAG_1: "Sanity"
 debug: true
 networkLogs: true
 consoleLogs: info
+testTimeout: 60000
