@@ -1,23 +1,31 @@
 {
-  "name": "jenkinssetup",
+  "name": "JenkinsSetup",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "sample-test": "browserstack-node-sdk --config browserstack.json jest src/sample.test.js",
-    "sample-local-test": "browserstack-node-sdk --config browserstack-local.json jest src/sample-local.test.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "browserstack-local": "^1.5.8",
-    "dotenv": "^17.2.0",
-    "selenium-webdriver": "^4.33.0"
-  },
+  "author": "BrowserStack",
+  "license": "MIT",
+  "description": "Selenium examples using JestJS and BrowserStack",
+  "keywords": [
+    "browserstack",
+    "selenium",
+    "automate",
+    "examples",
+    "jest",
+    "jestjs"
+  ],
   "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "browserstack-node-sdk": "^1.37.0",
-    "jest": "^29.7.0"
+    "@types/jest": "^27.4.0",
+    "browserstack-node-sdk": "^1.36.5",
+    "jest": "^27.4.7"
+  },
+  "dependencies": {
+    "browserstack-local": "^1.4.8",
+    "dotenv": "^16.0.0",
+    "selenium-webdriver": "4.1.2"
+  },
+  "scripts": {
+    "test-browserstack": "browserstack-node-sdk node test-script.js",
+    "sample-test": "browserstack-node-sdk jest src/sample.test.js",
+    "sample-local-test": "browserstack-node-sdk jest src/sample-local.test.js",
+    "postinstall": "npm update browserstack-node-sdk"
   }
 }
