@@ -1,24 +1,22 @@
-const { Builder, By } = require('selenium-webdriver');
+const { Builder, By, Capabilities } = require("selenium-webdriver");
 
-describe('BStack demo test', () => {
-  jest.setTimeout(100000);
+describe("BStack demo test", () => {
+  let driver;
 
-  test('login test', async () => {
-    let driver = await new Builder().usingServer('http://hub-cloud.browserstack.com/wd/hub').build();
-    await driver.get('https://www.saucedemo.com');
-    await driver.findElement(By.id('user-name')).sendKeys('standard_user');
-    await driver.findElement(By.id('password')).sendKeys('secret_sauce');
-    await driver.findElement(By.id('login-button')).click();
-    await driver.quit();
+  beforeAll(() => {
+    driver = new Builder()
+      .usingServer(`http://localhost:4444/wd/hub`)
+      .withCapabilities(Capabilities.chrome())
+      .build();
   });
-
-  test('add products to cart', async () => {
-    let driver = await new Builder().usingServer('http://hub-cloud.browserstack.com/wd/hub').build();
-    await driver.get('https://www.saucedemo.com');
-    await driver.findElement(By.id('user-name')).sendKeys('standard_user');
-    await driver.findElement(By.id('password')).sendKeys('secret_sauce');
-    await driver.findElement(By.id('login-button')).click();
-    await driver.findElement(By.css('.inventory_item button')).click();
+  
+  afterAll(async () => {
     await driver.quit();
-  });
+  })
+
+  test("local test", async () => {
+    await driver.get("http://bs-local.com:45454/");
+
+    expect(await driver.getTitle()).toContain('BrowserStack Local');
+  }, 10000000);
 });
