@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "sample-test": "browserstack-node-sdk jest src/sample.test.js",
-    "sample-local-test": "browserstack-node-sdk jest src/sample-local.test.js"
+    "sample-local-test": "browserstack-node-sdk --config browserstack-local.yml jest src/sample-local.test.js"
   },
   "keywords": [],
   "author": "",
