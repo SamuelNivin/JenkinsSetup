@@ -13,8 +13,9 @@ pipeline {
       }
     }
 
-    stage('Install Node.js & Dependencies') {
+    stage('Install Node.js') {
       steps {
+        sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
         sh '''
           export NVM_DIR="$HOME/.nvm"
           source $NVM_DIR/nvm.sh
@@ -36,7 +37,10 @@ pipeline {
       }
     }
 
-    stage('Run BrowserStack Local Test') {
+    stage('Run Local Test (optional)') {
+      when {
+        expression { return fileExists('src/sample-local.test.js') }
+      }
       steps {
         sh '''
           export NVM_DIR="$HOME/.nvm"
